@@ -48,3 +48,20 @@ OSSpinLock （暂不建议使用，原因参见这里）
 
 ## 6.读写锁底层怎么实现
 https://juejin.im/post/6844903902530240526
+
+## 7.GCD中的常见操作
+dispatch_async  
+dispatch_sync  
+dispatch_group dispatch_group_wait  
+dispatch_barrier_async  
+dispath_after  
+dispatch_semaphore_t  
+>Dispatch semaphore是持有计数的信号，该计数是多线程编程中的计数类型信号。所谓信号，类似于过马路时常用的手旗，可以通过时举起手旗，不可通过时放下手旗。而在Dispatch semaphore，使用计数来实现该功能。计数为0时等待，计数为1或大于1时，减去1而不等待。
+通过``dispatch_semaphore_create(<#long value#>)``函数生成Dispatch Semaphore。参数表示计数的初始值，
+
+dispatch_source
+
+作者：zziazm
+链接：https://www.jianshu.com/p/435122351078
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
