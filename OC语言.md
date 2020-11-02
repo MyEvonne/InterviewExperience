@@ -18,3 +18,7 @@
 对象释放时，调用clearDeallocating函数根据对象地址获取所有weak指针地址的数组，然后遍历这个数组把其中的数据设为nil，最后把这个entry从weak表中删除，最后清理对象的记录。  
 性能考虑。使用 weak 对性能有一些影响，因此对性能要求高的地方可以考虑使用 unsafe_unretained 替换 weak。一个例子是 YYModel 的实现，为了追求更高的性能，其中大量使用 unsafe_unretained 作为变量标识符。  
 https://hit-alibaba.github.io/interview/iOS/ObjC-Basic/MM.html
+
+## 4.struct中成员变量占多少字节
+
+## 5.一个OC对象在iOS中所占的内存字节数
