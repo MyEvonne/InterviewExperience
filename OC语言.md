@@ -48,3 +48,37 @@ https://www.jianshu.com/p/1be2526f5879
 * initialize方法也是走消息传递的方式进行调用。
 
 https://juejin.im/post/6844904040703197191
+
+## 8.category的实现原理。
+category有一个结构体：
+```
+// 定义在objc-runtime-new.h文件中
+struct category_t {
+    const char *name; // 比如给Student添加分类，name就是Student的类名
+    classref_t cls;
+    struct method_list_t *instanceMethods; // 分类的实例方法列表
+    struct method_list_t *classMethods; // 分类的类方法列表
+    struct protocol_list_t *protocols; // 分类的协议列表
+    struct property_list_t *instanceProperties; // 分类的实例属性列表
+    struct property_list_t *_classProperties; // 分类的类属性列表
+};
+
+作者：一叶知秋0830
+链接：https://juejin.im/post/6844904039671398407
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+runtime阶段，这些方法都会并入这个类的methodlist里面，先编译的会被调用到。
+
+## 9.category与extension的区别。
+1. 类别中原则上只能增加方法（能添加属性的的原因只是通过runtime解决无setter/getter的问题而已）；
+2. 类扩展不仅可以增加方法，还可以增加实例变量（或者属性），只是该实例变量默认是@private类型的（
+用范围只能在自身类，而不是子类或其他地方）；
+3. 类扩展中声明的方法没被实现，编译器会报警，但是类别中的方法没被实现编译器是不会有任何警告的。这是因为类扩展是在编译阶段被添加到类中，而类别是在运行时添加到类中。
+4. 类扩展不能像类别那样拥有独立的实现部分（@implementation部分），也就是说，类扩展所声明的方法必须依托对应类的实现部分来实现。
+5. 定义在 .m 文件中的类扩展方法为私有的，定义在 .h 文件（头文件）中的类扩展方法为公有的。类扩展是在 .m 文件中声明私有方法的非常好的方式。
+
+作者：CoderDancer
+链接：https://www.jianshu.com/p/9e827a1708c6
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
