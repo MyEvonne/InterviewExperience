@@ -12,6 +12,17 @@ https://www.dazhuanlan.com/2019/10/02/5d94062bacb0e/
 解决方法：
 https://juejin.im/post/6844903622031966222
 
+### NSTimer与runloop的关系
+NSTimer必须添加到一个runloop里面才能运行，不然会无效。
+https://www.jianshu.com/p/f9999b5958f8
+
+### NSTimer与CADisplayLink以及GCD Timer的对比
+* NSTimer依赖于runloop，当runloop在执行一个比价费时的任务时，NSTimer会不准。
+* CADisplayLink是根据屏幕刷新频率来的，所以出发间隔设置比较死板，并且在每次处罚时不能执行比较费时的任务，一般用来处理一些界面重绘的任务。
+* GCD Timer不依赖runloop，比较精确，就是代码比较不美观。
+https://www.jianshu.com/p/b90754c033fc
+
+
 ## 2.delegate在什么情况下会出现内存泄漏，怎么解决？
 在delegate被声明为strong的时候，会形成循环引用。
 https://www.jianshu.com/p/1d2f0cb0c2bf  
