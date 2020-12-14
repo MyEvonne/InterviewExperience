@@ -82,3 +82,21 @@ runtime阶段，这些方法都会并入这个类的methodlist里面，先编译
 链接：https://www.jianshu.com/p/9e827a1708c6
 来源：简书
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+## 10.A调用了B方法都做了什么事情
+1. 判断 receiver（objc_msgSend的第一个参数self） 是否为 nil。ObjC 的特性是允许对一个 nil 对象执行任何一个方法不会 Crash，因为会被忽略掉
+2. 从 cache 中查找 SEL 对应的 IMP，若找到，则执行，否则
+3. 从对象的方法链表中根据 SEL 去查找 IMP，找到后加入到缓存。查找过程如下：
+ * 如果支持GC，忽略掉非GC环境的方法（retain等）
+ * 从对象的 Class 的 method_list 寻找 selector，如果找到，填充到缓存中，并返回 selector，否则
+ * 从对象的超类的 method_list 寻找，并依次往上寻找，直到找到 selector，填充到缓存中，并返回 selector，否则
+ * 调用 _class_resolveMethod，动态方法决议，若找到 selector 对应的方法实现 IMP，不缓存，方法返回，否则
+ * 转发这个 selector，否则
+ ![avatar](/resource/messageForword.png)
+4. 报错，抛出异常
+
+https://yangjie2.github.io/2018/10/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Objective-C%EF%BC%9A%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8/
+
+## 11.为什么Objective-C中有Class和MetaClass这种设计？去掉是否可以？
+![isa](/resource/isa_point.webp)
+https://www.jianshu.com/p/ea7c42e16da8

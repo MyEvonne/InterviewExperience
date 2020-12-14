@@ -22,6 +22,15 @@ https://www.jianshu.com/p/f9999b5958f8
 * GCD Timer不依赖runloop，比较精确，就是代码比较不美观。
 https://www.jianshu.com/p/b90754c033fc
 
+### 如何检测系统卡顿
+1. FPS,使用CADisplayLink。
+2. runloop 在runloop上添加observer，然后监听kCFRunLoopBeforeSources跟kCFRunLoopBeforeWaiting两个状态之间的时间。
+
+https://juejin.cn/post/6844903944867545096
+
+https://blog.csdn.net/u014795020/article/details/72084735?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param
+
+https://blog.ibireme.com/2015/05/18/runloop/
 
 ## 2.delegate在什么情况下会出现内存泄漏，怎么解决？
 在delegate被声明为strong的时候，会形成循环引用。
@@ -36,6 +45,7 @@ https://www.jianshu.com/p/dfb86899ea44
 ## 4.iOS中有哪些多线程技术
 pThread,GCD,NSOperation,NSThread
 NSOperation是GCD的封装。
+https://juejin.cn/post/6844903951431647246
 
 ## 5.如果有两个同步任务嵌套会怎样？常见的锁，为什么要加锁？C依赖AB任务执行完成才执行，你怎么设计？
 1. 程序会卡住  
@@ -89,4 +99,22 @@ dispatch_source
 作者：齐滇大圣
 链接：https://www.jianshu.com/p/42891fb90304
 来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+## 9.iOS中线程间通信
+Mach Port
+https://juejin.cn/post/6844904152082939917
+
+## 10.iOS中检测方法执行时间
+CFAbsoluteTimeGetCurrent
+time profiler
+
+## 11.Autoreleasepool的底层实现机制
+* 自动释放池是一个个 AutoreleasePoolPage 组成的一个page是4096字节大小,每个 AutoreleasePoolPage 以双向链表连接起来形成一个自动释放池
+* 当对象调用 autorelease 方法时，会将对象加入 AutoreleasePoolPage 的栈中
+* pop 时是传入边界对象,然后对page 中的对象发送release 的消息
+
+作者：jackyshan_
+链接：https://juejin.cn/post/6844903609428115470
+来源：掘金
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

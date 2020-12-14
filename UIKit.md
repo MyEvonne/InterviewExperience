@@ -21,3 +21,14 @@ CALayer 是默认修改属性支持隐式动画的，在给 UIView 的 Layer 做
 layer 内部维护着三分 layer tree,分别是 presentLayer Tree(动画树),modeLayer Tree(模型树), Render Tree (渲染树),在做 iOS动画的时候，我们修改动画的属性，在动画的其实是 Layer 的 presentLayer的属性值,而最终展示在界面上的其实是提供 View的modelLayer
 https://www.cnblogs.com/xujinzhong/p/11155084.html
 ## 3.frame和bounds在什么情况下是不相等的？bounds的x，y一定是0，0么？为什么？bounds改成（50，50，width，height）会发生什么？view本身与子view？
+
+
+## 4.手指触摸屏幕以后系统都做了那些事情
+屏幕->application->find best responder.
+responde chain
+https://mp.weixin.qq.com/s/SWcCXL0o05tFfLbSjS49Ag
+https://gsl201600.github.io/2019/12/25/iOS%E4%B8%AD%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%93%8D%E5%BA%94%E9%93%BE%E5%92%8C%E4%BC%A0%E9%80%92%E9%93%BE/
+
+## 5.Frame与Bounds的区别，如果bounds的origin不是00会怎样
+frame指的是view在父view的坐标系内的origin，bounds是view自身内部的坐标系。
+https://www.jianshu.com/p/b59f0b69c52f
