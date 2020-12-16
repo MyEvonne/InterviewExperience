@@ -100,3 +100,6 @@ https://yangjie2.github.io/2018/10/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Object
 ## 11.为什么Objective-C中有Class和MetaClass这种设计？去掉是否可以？
 ![isa](/resource/isa_point.webp)
 https://www.jianshu.com/p/ea7c42e16da8
+
+## 12.你理解的id，以及id与void *的区别。
+id本身就是一个指针，声明的时候不用加*

@@ -40,12 +40,23 @@ https://www.jianshu.com/p/b2f5e0429712
 ## 3.delegate和Notification的区别。
 delegate是一对一，notification可以看做是一种广播。
 delegate在调用后，receiver还可以返回高速delegate结果，而notification则不管结果。
+
 https://www.jianshu.com/p/dfb86899ea44
 
 ## 4.iOS中有哪些多线程技术
 pThread,GCD,NSOperation,NSThread
 NSOperation是GCD的封装。
 https://juejin.cn/post/6844903951431647246
+https://www.jianshu.com/p/a110d5038a2d
+https://blog.jerrychu.top/2018/03/25/MainQueue/
+https://www.jianshu.com/p/d6c94f773b34
+
+### 主队列和主线程的关系，全局并发队列一定在主线程上运行么？
+主队列的任务一般都是在主线程上运行，除非主线程阻塞，那么系统会将任务调配到其他线程进行。
+
+While doing some research for this post I found a commit to libdispatch that ensures that blocks dispatched with dispatch_sync are always executed on the current thread. This means if you use dispatch_sync to dispatch a block from the main queue to a concurrent background queue, the code executing on the background queue will actually be executed on the main thread. While this might not be entirely intuitive, it makes sense: since the main queue needs to wait until the dispatched block completed, the main thread will be available to process blocks from queues other than the main queue.
+
+https://www.jianshu.com/p/d6c94f773b34
 
 ## 5.如果有两个同步任务嵌套会怎样？常见的锁，为什么要加锁？C依赖AB任务执行完成才执行，你怎么设计？
 1. 程序会卡住  
